@@ -1,14 +1,14 @@
 import React from 'react';
-import { itemstate } from '../Atom';
+import { itemstate } from '../store';
 import { useRecoilState } from 'recoil';
-import { count } from '../Atom';
+import { count } from '../store';
 import ClearIcon from '@mui/icons-material/Clear';
 import Box from '@mui/material/Box';
 
 const ListItem = ({ text, id }) => {
 	const [items, setItems] = useRecoilState(itemstate);
 	const [, setCount] = useRecoilState(count);
-	const handleClick = (id) => {
+	const handleItemRemoval = (id) => {
 		setCount((prev) => prev - 1);
 		const newItems = items.filter((note) => note.id !== id);
 		setItems(newItems);
@@ -27,7 +27,7 @@ const ListItem = ({ text, id }) => {
 				padding: '0.5rem',
 			}}>
 			<div>{text}</div>
-			<Box onClick={() => handleClick(id)}>
+			<Box onClick={() => handleItemRemoval(id)}>
 				<ClearIcon />
 			</Box>
 		</Box>

@@ -1,38 +1,26 @@
 import { React, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { itemstate } from '../Atom';
-import { count } from '../Atom';
-import { dateChange } from '../Atom';
+import { itemstate } from '../store';
+import { count } from '../store';
+import { dateChange } from '../store';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import Box from '@mui/material/Box';
 import { nanoid } from 'nanoid';
+import { sortByName, sortByDate } from '../utils';
 import Alert from '@mui/material/Alert';
 
 const Addlist = () => {
 	const [text, setText] = useState('');
 	const [alert, setAlert] = useState(false);
 	const [items, setItems] = useRecoilState(itemstate);
-	const [counts, setCount] = useRecoilState(count);
+	const [, setCount] = useRecoilState(count);
 	const dates = useRecoilValue(dateChange);
 	const handleChange = (event) => {
 		setText(event.target.value);
 	};
-	const sortByDate = (a, b) => {
-		return a.date - b.date;
-	};
 
-	const sortByName = (a, b) => {
-		if (a.text.toLowerCase() > b.text.toLowerCase()) {
-			return 1;
-		} else if (b.text.toLowerCase() > a.text.toLowerCase()) {
-			return -1;
-		} else {
-			return 0;
-		}
-	};
-
-	const handleClick = () => {
+	const handleItemSave = () => {
 		if (text.trim() === '') {
 			setAlert(true);
 		} else {
@@ -79,7 +67,7 @@ const Addlist = () => {
 							borderRadius: '1rem',
 							marginBottom: '1rem',
 						}}
-						onClick={handleClick}
+						onClick={handleItemSave}
 						variant='contained'
 						endIcon={<SendIcon />}>
 						Save

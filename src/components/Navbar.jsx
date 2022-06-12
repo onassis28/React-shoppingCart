@@ -1,6 +1,4 @@
 import React from 'react';
-import { count } from '../Atom';
-import { useRecoilValue, useRecoilState } from 'recoil';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Badge from '@mui/material/Badge';
 import Box from '@mui/material/Box';

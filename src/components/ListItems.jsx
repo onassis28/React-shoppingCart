@@ -1,18 +1,18 @@
 import { React } from 'react';
 import ListItem from './ListItem';
-import { itemstate } from '../Atom';
-import { dateChange } from '../Atom';
+import { itemstate } from '../store';
+import { dateChange } from '../store';
 import { useRecoilState } from 'recoil';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
+import { sortByName, sortByDate } from '../utils';
 
 const ListItems = ({ handleClick }) => {
 	const [items, setItems] = useRecoilState(itemstate);
-
 	const [dates, setDate] = useRecoilState(dateChange);
 
-	const sortByDate = (a, b) => {
+	/*const sortByDate = (a, b) => {
 		return a.date - b.date;
 	};
 
@@ -24,27 +24,27 @@ const ListItems = ({ handleClick }) => {
 		} else {
 			return 0;
 		}
-	};
-	const handledate = () => {
+	};*/
+	const handleDateSort = () => {
 		setDate(true);
 		const newarray = [...items];
 		newarray.sort(sortByDate);
 		setItems(newarray);
 	};
-	const handleName = () => {
+	const handleNameSort = () => {
 		setDate(false);
 		const newarray2 = [...items];
 		newarray2.sort(sortByName);
 		setItems(newarray2);
 	};
 
-	const dataRender = [...items].sort(sortByDate).map((item) => {
+	const renderByDate = [...items].sort(sortByDate).map((item) => {
 		return (
 			<ListItem id={item.id} key={item.id} text={item.text} date={item.date} />
 		);
 	});
 
-	const nameRender = [...items].sort(sortByName).map((item) => {
+	const renderByName = [...items].sort(sortByName).map((item) => {
 		return (
 			<ListItem id={item.id} key={item.id} text={item.text} date={item.date} />
 		);
@@ -57,17 +57,17 @@ const ListItems = ({ handleClick }) => {
 					<Button
 						sx={{ borderRadius: '1rem' }}
 						variant={dates ? 'contained' : 'outlined'}
-						onClick={handledate}>
+						onClick={handleDateSort}>
 						Sort by Date
 					</Button>
 					<Button
 						sx={{ borderRadius: '1rem' }}
 						variant={dates === false ? 'contained' : 'outlined'}
-						onClick={handleName}>
+						onClick={handleNameSort}>
 						Sort by Name
 					</Button>
 				</Box>
-				<Stack spacing={2}>{dates ? dataRender : nameRender}</Stack>
+				<Stack spacing={2}>{dates ? renderByDate : renderByName}</Stack>
 			</Box>
 		</>
 	);
