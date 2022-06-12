@@ -32,8 +32,8 @@ const Addlist = () => {
 		}
 	};
 
-	const handleClick = (e) => {
-		if (text === '') {
+	const handleClick = () => {
+		if (text.trim() === '') {
 			setAlert(true);
 		} else {
 			setAlert(false);

@@ -5,9 +5,9 @@ import { count } from '../Atom';
 import ClearIcon from '@mui/icons-material/Clear';
 import Box from '@mui/material/Box';
 
-const List = ({ text, id }) => {
+const ListItem = ({ text, id }) => {
 	const [items, setItems] = useRecoilState(itemstate);
-	const [counts, setCount] = useRecoilState(count);
+	const [, setCount] = useRecoilState(count);
 	const handleClick = (id) => {
 		setCount((prev) => prev - 1);
 		const newItems = items.filter((note) => note.id !== id);
@@ -34,4 +34,4 @@ const List = ({ text, id }) => {
 	);
 };
 
-export default List;
+export default ListItem;

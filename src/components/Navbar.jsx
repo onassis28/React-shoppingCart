@@ -1,12 +1,11 @@
 import React from 'react';
 import { count } from '../Atom';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useRecoilState } from 'recoil';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Badge from '@mui/material/Badge';
 import Box from '@mui/material/Box';
 
-const Navbar = () => {
-	const countNumber = useRecoilValue(count);
+const Navbar = ({ counts }) => {
 	return (
 		<Box
 			sx={{
@@ -20,7 +19,7 @@ const Navbar = () => {
 				<h1>Shopping list</h1>
 			</div>
 			<div>
-				<Badge badgeContent={countNumber} color='primary'>
+				<Badge badgeContent={counts} color='primary'>
 					<ShoppingCartIcon color='primary' fontSize='large' />
 				</Badge>
 			</div>

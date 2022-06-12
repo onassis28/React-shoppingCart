@@ -1,5 +1,5 @@
 import { React } from 'react';
-import List from './List';
+import ListItem from './ListItem';
 import { itemstate } from '../Atom';
 import { dateChange } from '../Atom';
 import { useRecoilState } from 'recoil';
@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 
-const ListItems = () => {
+const ListItems = ({ handleClick }) => {
 	const [items, setItems] = useRecoilState(itemstate);
 
 	const [dates, setDate] = useRecoilState(dateChange);
@@ -40,13 +40,13 @@ const ListItems = () => {
 
 	const dataRender = [...items].sort(sortByDate).map((item) => {
 		return (
-			<List id={item.id} key={item.id} text={item.text} date={item.date} />
+			<ListItem id={item.id} key={item.id} text={item.text} date={item.date} />
 		);
 	});
 
 	const nameRender = [...items].sort(sortByName).map((item) => {
 		return (
-			<List id={item.id} key={item.id} text={item.text} date={item.date} />
+			<ListItem id={item.id} key={item.id} text={item.text} date={item.date} />
 		);
 	});
 
