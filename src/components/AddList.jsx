@@ -7,7 +7,6 @@ import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import Box from '@mui/material/Box';
 import { nanoid } from 'nanoid';
-import { sortByName, sortByDate } from '../utils';
 import Alert from '@mui/material/Alert';
 
 const Addlist = () => {
@@ -23,6 +22,7 @@ const Addlist = () => {
 	const handleItemSave = () => {
 		if (text.trim() === '') {
 			setAlert(true);
+			setText('');
 		} else {
 			setAlert(false);
 			const date = new Date().getTime();
@@ -32,15 +32,8 @@ const Addlist = () => {
 				text: text,
 				date: date,
 			};
-			if (dates) {
-				const newarray = [...items, newitem];
-				newarray.sort(sortByDate);
-				setItems(newarray);
-			} else {
-				const newarray2 = [...items, newitem];
-				newarray2.sort(sortByName);
-				setItems(newarray2);
-			}
+			const newarray = [...items, newitem];
+			setItems(newarray);
 			setText('');
 		}
 	};

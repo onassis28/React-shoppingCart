@@ -2,40 +2,20 @@ import { React } from 'react';
 import ListItem from './ListItem';
 import { itemstate } from '../store';
 import { dateChange } from '../store';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import { sortByName, sortByDate } from '../utils';
 
-const ListItems = ({ handleClick }) => {
-	const [items, setItems] = useRecoilState(itemstate);
+const ListItems = () => {
+	const items = useRecoilValue(itemstate);
 	const [dates, setDate] = useRecoilState(dateChange);
-
-	/*const sortByDate = (a, b) => {
-		return a.date - b.date;
-	};
-
-	const sortByName = (a, b) => {
-		if (a.text.toLowerCase() > b.text.toLowerCase()) {
-			return 1;
-		} else if (b.text.toLowerCase() > a.text.toLowerCase()) {
-			return -1;
-		} else {
-			return 0;
-		}
-	};*/
 	const handleDateSort = () => {
 		setDate(true);
-		const newarray = [...items];
-		newarray.sort(sortByDate);
-		setItems(newarray);
 	};
 	const handleNameSort = () => {
 		setDate(false);
-		const newarray2 = [...items];
-		newarray2.sort(sortByName);
-		setItems(newarray2);
 	};
 
 	const renderByDate = [...items].sort(sortByDate).map((item) => {

@@ -2,8 +2,11 @@ import React from 'react';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Badge from '@mui/material/Badge';
 import Box from '@mui/material/Box';
+import { useRecoilValue } from 'recoil';
+import { count } from '../store';
 
-const Navbar = ({ counts }) => {
+const Navbar = () => {
+	const counts = useRecoilValue(count);
 	return (
 		<Box
 			sx={{
