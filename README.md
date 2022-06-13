@@ -2,9 +2,11 @@ Using App Locally
 
 Clone this repository
 
-run 'yarn install' in terminal from the root
+change directory into the root of the project
 
-run 'yarn start' in terminal
+run 'yarn install' in the terminal from the root
+
+run 'yarn start' in the terminal
 
 Enjoy using the app!!
 
